@@ -1,3 +1,5 @@
+import "./Form.css";
+
 interface Props {
   label: string;
   placeholder: string;

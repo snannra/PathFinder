@@ -5,6 +5,7 @@ function App() {
   return (
     <>
       <Form label="Starting Address" placeholder="1234 Berry lane" />
+      <Form label="Ending Address" placeholder="1234 Berry lane" />
       <Button
         children="Submit"
         color="secondary"
