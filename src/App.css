@@ -1,42 +1,35 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* App.css */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Align items to the top */
+  height: 100vh;
+  padding-top: 20px; /* Add some padding from the top */
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.title {
+  margin-bottom: 20px;
+  font-size: 2em;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.form-container {
+  display: flex;
+  flex-direction: row; /* Arrange items in a row */
+  align-items: center; /* Align items vertically in the center */
+  gap: 15px; /* Adds space between form elements */
+  margin-bottom: 20px; /* Add some space between form and button */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.button-wrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 15px; /* Adjust this value to move the button lower */
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.separator {
+  width: 80%; /* Adjust the width as needed */
+  border: 1px solid #ccc; /* Adjust the color and thickness as needed */
+  margin-top: 5px; /* Add space between form and line */
 }
