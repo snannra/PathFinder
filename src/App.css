@@ -1,11 +1,12 @@
 /* App.css */
+
 .app-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Align items to the top */
+  justify-content: flex-start;
   height: 100vh;
-  padding-top: 20px; /* Add some padding from the top */
+  padding-top: 20px;
   text-align: center;
 }
 
@@ -16,20 +17,36 @@
 
 .form-container {
   display: flex;
-  flex-direction: row; /* Arrange items in a row */
-  align-items: center; /* Align items vertically in the center */
-  gap: 15px; /* Adds space between form elements */
-  margin-bottom: 20px; /* Add some space between form and button */
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
 .button-wrapper {
   display: flex;
   align-items: center;
-  margin-top: 15px; /* Adjust this value to move the button lower */
+  margin-top: 15px;
 }
 
 .separator {
+  width: 80%;
+  border: 1px solid #ccc;
+  margin-top: 5px;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+}
+
+.map-container {
+  height: 100%; /* Adjust the height as needed */
   width: 80%; /* Adjust the width as needed */
-  border: 1px solid #ccc; /* Adjust the color and thickness as needed */
-  margin-top: 5px; /* Add space between form and line */
+  margin: auto; /* Center the map horizontally */
+}
+
+#map {
+  height: 100%;
+  width: 100%;
 }
