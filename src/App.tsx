@@ -2,21 +2,18 @@
 import { useState } from "react";
 import Button from "./components/Button";
 import Form from "./components/Form";
-import {
-  APIProvider,
-  Map,
-  MapCameraChangedEvent,
-} from "@vis.gl/react-google-maps";
+import Maps from "./components/Map"; // Import the updated Maps component
+import { APIProvider } from "@vis.gl/react-google-maps";
 import "./App.css"; // Import the CSS file
 
 function App() {
-  const [startingAdress, setStartingAdress] = useState("");
-  const [endingAdress, setEndingAdress] = useState("");
+  const [startingAddress, setStartingAddress] = useState("");
+  const [endingAddress, setEndingAddress] = useState("");
   const [milesRan, setMilesRan] = useState("");
 
   const handleSubmit = () => {
-    console.log("Starting Adress: ", startingAdress);
-    console.log("Ending Adress: ", endingAdress);
+    console.log("Starting Address: ", startingAddress);
+    console.log("Ending Address: ", endingAddress);
     console.log("Miles Ran: ", milesRan);
   };
 
@@ -27,12 +24,12 @@ function App() {
         <Form
           label="Starting Address"
           placeholder="1234 Berry Lane"
-          onChange={setStartingAdress}
+          onChange={setStartingAddress}
         />
         <Form
           label="Ending Address"
           placeholder="1234 Berry Lane"
-          onChange={setEndingAdress}
+          onChange={setEndingAddress}
         />
         <Form
           label="How Many Miles Do You Want To Run?"
@@ -46,21 +43,13 @@ function App() {
       <hr className="separator" />
       <main>
         <APIProvider
-          apiKey={"AIzaSyAf8saf84jOHdc3hRPRWlohg8jMboERkd8"}
+          apiKey="AIzaSyAf8saf84jOHdc3hRPRWlohg8jMboERkd8"
           onLoad={() => console.log("Maps API has loaded.")}
         >
           <div className="map-container">
-            <Map
+            <Maps
               defaultZoom={13}
               defaultCenter={{ lat: -33.860664, lng: 151.208138 }}
-              onCameraChanged={(ev: MapCameraChangedEvent) =>
-                console.log(
-                  "camera changed:",
-                  ev.detail.center,
-                  "zoom:",
-                  ev.detail.zoom
-                )
-              }
             />
           </div>
         </APIProvider>

@@ -1,13 +1,21 @@
 /* App.css */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: auto; /* Ensure the page can scroll */
+}
 
 .app-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  height: 100vh;
+  min-height: 100vh; /* Ensure the container takes at least the full height of the viewport */
   padding-top: 20px;
+  padding-bottom: 100px; /* Add padding at the bottom for extra space */
   text-align: center;
+  box-sizing: border-box; /* Include padding in the height calculation */
 }
 
 .title {
@@ -41,9 +49,9 @@ main {
 }
 
 .map-container {
-  height: 100%; /* Adjust the height as needed */
+  height: 400px; /* Adjust the height as needed */
   width: 80%; /* Adjust the width as needed */
-  margin: auto; /* Center the map horizontally */
+  margin: 0 auto; /* Center the map horizontally */
 }
 
 #map {
