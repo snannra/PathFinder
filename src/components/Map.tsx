@@ -4,23 +4,7 @@ import {
   MapCameraChangedEvent,
 } from "@vis.gl/react-google-maps";
 import { useEffect, useState } from "react";
-
-function getCurrentLocation(): Promise<{
-  latitude: number;
-  longitude: number;
-}> {
-  return new Promise((resolve, reject) => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        resolve({ latitude, longitude });
-      },
-      (error) => {
-        reject(error);
-      }
-    );
-  });
-}
+import { getCurrentLocation } from "../services/geolocation";
 
 const Maps = () => {
   const [location, setLocation] = useState<{
