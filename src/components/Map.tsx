@@ -1,41 +1,74 @@
-// src/components/Map.tsx
-import React, { useEffect, useRef, useState } from "react";
+import {
+  Map,
+  APIProvider,
+  MapCameraChangedEvent,
+} from "@vis.gl/react-google-maps";
+import { useEffect, useState } from "react";
 
-interface Props {
-  defaultZoom: number;
-  defaultCenter: { lat: number; lng: number };
+function getCurrentLocation(): Promise<{
+  latitude: number;
+  longitude: number;
+}> {
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        resolve({ latitude, longitude });
+      },
+      (error) => {
+        reject(error);
+      }
+    );
+  });
 }
 
-const Maps: React.FC<Props> = ({ defaultZoom, defaultCenter }) => {
-  const mapRef = useRef<HTMLDivElement>(null);
-  const [map, setMap] = useState<google.maps.Map | null>(null);
+const Maps = () => {
+  const [location, setLocation] = useState<{
+    latitude: number;
+    longitude: number;
+  } | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (mapRef.current && !map) {
-      const mapInstance = new google.maps.Map(mapRef.current, {
-        zoom: defaultZoom,
-        center: defaultCenter,
+    getCurrentLocation()
+      .then((location) => {
+        setLocation(location);
+      })
+      .catch((error) => {
+        console.error("Error getting location", error);
+        setError("Error getting location");
       });
-      setMap(mapInstance);
+  }, []);
 
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const userLocation = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-            };
-            mapInstance.setCenter(userLocation);
-          },
-          (error) => {
-            console.error("Error getting user location:", error);
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  if (!location) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div className="map-container">
+      <APIProvider
+        apiKey={"AIzaSyAf8saf84jOHdc3hRPRWlohg8jMboERkd8"}
+        onLoad={() => console.log("Maps API has loaded.")}
+      >
+        <Map
+          defaultZoom={13}
+          defaultCenter={{ lat: location.latitude, lng: location.longitude }}
+          onCameraChanged={(ev: MapCameraChangedEvent) =>
+            console.log(
+              "camera changed:",
+              ev.detail.center,
+              "zoom:",
+              ev.detail.zoom
+            )
           }
-        );
-      }
-    }
-  }, [map, defaultZoom, defaultCenter]);
-
-  return <div ref={mapRef} style={{ height: "400px", width: "100%" }}></div>;
+        ></Map>
+      </APIProvider>
+    </div>
+  );
 };
 
 export default Maps;
