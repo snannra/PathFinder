@@ -3,16 +3,15 @@ import { useState } from "react";
 import Button from "./components/Button";
 import Form from "./components/Form";
 import Maps from "./components/Map";
+import Routing from "./services/routing";
 import "./App.css"; // Import the CSS file
 
 function App() {
   const [startingAdress, setStartingAdress] = useState("");
-  const [endingAdress, setEndingAdress] = useState("");
   const [milesRan, setMilesRan] = useState("");
 
   const handleSubmit = () => {
     console.log("Starting Adress: ", startingAdress);
-    console.log("Ending Adress: ", endingAdress);
     console.log("Miles Ran: ", milesRan);
   };
 
@@ -24,11 +23,6 @@ function App() {
           label="Starting Address"
           placeholder="1234 Berry Lane"
           onChange={setStartingAdress}
-        />
-        <Form
-          label="Ending Address"
-          placeholder="1234 Berry Lane"
-          onChange={setEndingAdress}
         />
         <Form
           label="How Many Miles Do You Want To Run?"
