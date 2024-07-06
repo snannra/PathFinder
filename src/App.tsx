@@ -1,18 +1,22 @@
-// src/App.tsx
 import { useState } from "react";
 import Button from "./components/Button";
 import Form from "./components/Form";
 import Maps from "./components/Map";
-import Routing from "./services/routing";
 import "./App.css"; // Import the CSS file
 
 function App() {
-  const [startingAdress, setStartingAdress] = useState("");
+  const [startingAddress, setStartingAddress] = useState("");
   const [milesRan, setMilesRan] = useState("");
+  const [routeInfo, setRouteInfo] = useState<{
+    start: string | null;
+    miles: number | null;
+  }>({ start: null, miles: null });
 
   const handleSubmit = () => {
-    console.log("Starting Adress: ", startingAdress);
+    console.log("Starting Address: ", startingAddress);
     console.log("Miles Ran: ", milesRan);
+
+    setRouteInfo({ start: startingAddress, miles: parseFloat(milesRan) });
   };
 
   return (
@@ -22,7 +26,7 @@ function App() {
         <Form
           label="Starting Address"
           placeholder="1234 Berry Lane"
-          onChange={setStartingAdress}
+          onChange={setStartingAddress}
         />
         <Form
           label="How Many Miles Do You Want To Run?"
@@ -35,7 +39,7 @@ function App() {
       </div>
       <hr className="separator" />
       <main className="map-container">
-        <Maps />
+        <Maps routeInfo={routeInfo} />
       </main>
     </div>
   );
