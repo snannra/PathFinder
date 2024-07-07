@@ -30,4 +30,24 @@ PathFinder is a React-based web application that helps runners plan their runnin
    ```bash
    npm install
 4. Obtain a Google Maps API key from the [Google Cloud Console](https://console.cloud.google.com).
-5. 
+5. Create a new _`.env`_ file in the root directory and add your API key.
+   ```bash
+   REACT_APP_GOOGLE_MAPS_API_KEY=your_api_key_here
+
+## Usage
+
+1. Start the development server:
+   ```bash
+   npm run dev
+2. Open your browser and go to _`http://localhost:5173/`_
+3. Enter the starting location and the distance you want to run.
+4. The application will display a map with the calculated running route.
+
+## Code Structure
+
+*_`src/components/Map.tsx`_: Main component that handles the map rendering and route calculation.
+*_`src/services/geolocation.ts`_: Service to get the current location of the user.
+*_`src/App.tsx`_: Main application component.
+*_`src/assets`_: Folder containing static assets like images and styles.
+*_`src/components`_: Folder containing reusable UI components.
+*_`src/services`_: Folder containing service files for various functionalities.
