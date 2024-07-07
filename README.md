@@ -56,3 +56,11 @@ PathFinder is a React-based web application that helps runners plan their runnin
 *_`src/components`_: Folder containing reusable UI components.
 
 *_`src/services`_: Folder containing service files for various functionalities.
+
+## Contributions
+
+Contributions are welcome! Please open an issue or submit a pull request with your changes.
+
+## Contact
+
+For questions or comments, please reach out to [snannra03@gmail.com](snannra03@gmail.com).
