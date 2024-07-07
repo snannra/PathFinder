@@ -46,8 +46,13 @@ PathFinder is a React-based web application that helps runners plan their runnin
 ## Code Structure
 
 *_`src/components/Map.tsx`_: Main component that handles the map rendering and route calculation.
+
 *_`src/services/geolocation.ts`_: Service to get the current location of the user.
+
 *_`src/App.tsx`_: Main application component.
+
 *_`src/assets`_: Folder containing static assets like images and styles.
+
 *_`src/components`_: Folder containing reusable UI components.
+
 *_`src/services`_: Folder containing service files for various functionalities.
