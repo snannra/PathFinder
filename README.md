@@ -27,7 +27,7 @@ PathFinder is a React-based web application that helps runners plan their runnin
    ```bash
    cd PathFinder
 3. Install the dependencies:
-  ```bash
-  npm install
+   ```bash
+   npm install
 4. Obtain a Google Maps API key from the [Google Cloud Console](https://console.cloud.google.com).
 5. 
