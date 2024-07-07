@@ -1,16 +1,17 @@
-import {
-  Map,
-  APIProvider,
-  MapCameraChangedEvent,
-} from "@vis.gl/react-google-maps";
+import { APIProvider } from "@vis.gl/react-google-maps";
 import { useEffect, useState } from "react";
 import { getCurrentLocation } from "../services/geolocation";
-import { DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
 
-const Maps: React.FC<{ routeInfo: { start: string | null; miles: number | null } }> = ({ routeInfo }) => {
-  const [location, setLocation] = useState<{ latitude: number; longitude: number } | null>(null);
+const Maps: React.FC<{
+  routeInfo: { start: string | null; miles: number | null };
+}> = ({ routeInfo }) => {
+  const [location, setLocation] = useState<{
+    latitude: number;
+    longitude: number;
+  } | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [directionsResponse, setDirectionsResponse] = useState<google.maps.DirectionsResult | null>(null);
+  const [directionsResponse, setDirectionsResponse] =
+    useState<google.maps.DirectionsResult | null>(null);
 
   useEffect(() => {
     getCurrentLocation()
@@ -35,10 +36,13 @@ const Maps: React.FC<{ routeInfo: { start: string | null; miles: number | null }
 
     if (!location) return;
 
-    const map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
-      zoom: 13,
-      center: { lat: location.latitude, lng: location.longitude },
-    });
+    const map = new google.maps.Map(
+      document.getElementById("map") as HTMLElement,
+      {
+        zoom: 13,
+        center: { lat: location.latitude, lng: location.longitude },
+      }
+    );
 
     directionsRenderer.setMap(map);
 
@@ -70,25 +74,42 @@ const Maps: React.FC<{ routeInfo: { start: string | null; miles: number | null }
     });
   };
 
-  const generateWaypoints = (start: google.maps.LatLng, miles: number): google.maps.DirectionsWaypoint[] => {
+  const generateWaypoints = (
+    start: google.maps.LatLng,
+    miles: number
+  ): google.maps.DirectionsWaypoint[] => {
     const km = miles * 1.60934; // Convert miles to kilometers
-    const numberOfWaypoints = 8; // Increased number of waypoints for better accuracy
+    const numberOfWaypoints = 5; // Half of the original number of waypoints
     const waypoints: google.maps.DirectionsWaypoint[] = [];
-    const distanceBetweenWaypoints = km / (numberOfWaypoints + 1); // Divide the distance more evenly
+    const distanceBetweenWaypoints = km / 4 / numberOfWaypoints;
 
-    for (let i = 1; i <= numberOfWaypoints; i++) {
-      const bearing = (360 / (numberOfWaypoints + 1)) * i; // Divide circle into more parts
-      const waypoint = calculateDestinationPoint(start, distanceBetweenWaypoints * i, bearing);
+    let totalDistance = 0;
+    let currentPoint = start;
+
+    for (let i = 0; i < numberOfWaypoints; i++) {
+      const nextPoint = calculateDestinationPoint(
+        currentPoint,
+        distanceBetweenWaypoints,
+        (i * 360) / numberOfWaypoints
+      );
+
       waypoints.push({
-        location: waypoint,
+        location: nextPoint,
         stopover: false,
       });
+
+      totalDistance += distanceBetweenWaypoints;
+      currentPoint = new google.maps.LatLng(nextPoint.lat, nextPoint.lng);
     }
 
     return waypoints;
   };
 
-  const calculateDestinationPoint = (start: google.maps.LatLng, distanceKm: number, bearing: number): google.maps.LatLngLiteral => {
+  const calculateDestinationPoint = (
+    start: google.maps.LatLng,
+    distanceKm: number,
+    bearing: number
+  ): google.maps.LatLngLiteral => {
     const R = 6371; // Radius of the Earth in km
     const bearingRad = (bearing * Math.PI) / 180; // Convert bearing to radians
     const distanceRatio = distanceKm / R; // Angular distance in radians
@@ -98,7 +119,7 @@ const Maps: React.FC<{ routeInfo: { start: string | null; miles: number | null }
 
     const destLatRad = Math.asin(
       Math.sin(startLatRad) * Math.cos(distanceRatio) +
-      Math.cos(startLatRad) * Math.sin(distanceRatio) * Math.cos(bearingRad)
+        Math.cos(startLatRad) * Math.sin(distanceRatio) * Math.cos(bearingRad)
     );
 
     const destLngRad =
@@ -128,7 +149,7 @@ const Maps: React.FC<{ routeInfo: { start: string | null; miles: number | null }
         apiKey={"AIzaSyAf8saf84jOHdc3hRPRWlohg8jMboERkd8"}
         onLoad={() => console.log("Maps API has loaded.")}
       >
-        <div id="map" style={{ height: '100%', width: '100%' }}></div>
+        <div id="map" style={{ height: "100%", width: "100%" }}></div>
       </APIProvider>
     </div>
   );
