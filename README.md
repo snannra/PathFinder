@@ -1,30 +1,33 @@
-# React + TypeScript + Vite
+# PathFinder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+PathFinder is a React-based web application that helps runners plan their running routes. Users can specify a starting location and the total distance they want to run, and the application generates a route that directs them back to their starting point after covering the specified distance.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- Get the current location of the user
+- Calculate a running route based on the specified starting point and distance
+- Display the running route on a Google Map
+- Generate waypoints up to half the total distance, then direct the user back to the start
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Technologies Used
 
-- Configure the top-level `parserOptions` property like this:
+- React
+- Vite
+- Google Maps API
+- TypeScript
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Installation
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/snannra/PathFinder.git
+2. Navigate to the project direcotry:
+   ```bash
+   cd PathFinder
+3. Install the dependencies:
+  ```bash
+  npm install
+4. Obtain a Google Maps API key from the [Google Cloud Console](https://console.cloud.google.com).
+5. 
